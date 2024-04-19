@@ -1,8 +1,1 @@
-python packages needs to install
-
-opencv-python, 
-pycaw, 
-pyautogui, 
-autopy, 
-mediapipe, 
-numpy
+Use python 3.7

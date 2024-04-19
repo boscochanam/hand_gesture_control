@@ -6,14 +6,15 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
-wCam, hCam = 640, 480
-cap = cv2.VideoCapture(1)
+wCam, hCam = 720, 1280
+cap = cv2.VideoCapture(0)
 cap.set(3,wCam)
 cap.set(4,hCam)
 pTime = 0
 #cTime = 0
+# detector = htm.handDetector(maxHands=1, detectionCon=0.85, trackCon=0.8)
+detector = htm.handDetector(maxHands=1, detectionCon=0, trackCon=0)
 
-detector = htm.handDetector(maxHands=1, detectionCon=0.85, trackCon=0.8)
 
 devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(
@@ -38,6 +39,7 @@ active = 0
 pyautogui.FAILSAFE = False
 while True:
     success, img = cap.read()
+    img = cv2.flip(img, 1)
     img = detector.findHands(img)
     lmList = detector.findPosition(img, draw=False)
    # print(lmList)
